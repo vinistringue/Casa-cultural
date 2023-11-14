@@ -1,0 +1,7 @@
+com/minhaempresa/casacultural/model/Filme.class
+com/minhaempresa/casacultural/controller/analise/AnaliseController.class
+com/minhaempresa/casacultural/controller/filme/FilmeController.class
+com/minhaempresa/casacultural/repository/FilmeRepository.class
+com/minhaempresa/casacultural/repository/AnaliseRepository.class
+com/minhaempresa/casacultural/CasaCulturalApplication.class
+com/minhaempresa/casacultural/model/Analise.class
