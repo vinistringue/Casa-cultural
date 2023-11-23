@@ -1,99 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Casa Cultural</title>
     <!-- Incluindo estilos Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <!-- Incluindo estilos personalizados -->
-    <link rel="stylesheet" href="/casa-cultural/src/main/resources/static/styles.css">
-</head>
-<body>
+    <link
+      id="themeStyles"
+      rel="stylesheet"
+      href="/src/main/resources/static/styles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/styles-dark.css"
+      disabled
+    />
+  </head>
+  <body>
+    <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand font-weight-bold display-4" href="#inicio">Casa Cultural</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <a class="navbar-brand font-weight-bold display-4" href="#inicio"
+        >Casa Cultural</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- Links de navegação -->
+          <li class="nav-item">
+            <a class="nav-link" href="#adicionar-filme">Filmes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#analise">Análise</a>
+          </li>
+        </ul>
+        <!-- Botão para alternar o tema claro/escuro -->
+        <button class="btn btn-outline-secondary ml-2" onclick="toggleTheme()">
+          Dark Theme
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <!-- Links de navegação -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#adicionar-filme">Adicionar Filme</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#analise">Análise</a>
-                </li>
-            </ul>
-        </div>
+      </div>
     </nav>
 
+    <!-- Conteúdo principal -->
     <div class="container">
-        <!-- Seção "Adicionar Filme" -->
-        <section id="adicionar-filme">
-            <h1 class="mt-5">Adicionar Filme</h1>
-            <div class="container">
-                <!-- Formulário para adicionar um filme -->
-                <form action="/filmes/adicionar" method="post" class="mt-4">
-                    <div class="form-group">
-                        <label for="titulo">Título:</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sinopse">Sinopse:</label>
-                        <textarea class="form-control" id="sinopse" name="sinopse" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="genero">Gênero:</label>
-                        <input type="text" class="form-control" id="genero" name="genero" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="anoLancamento">Data de Lançamento:</label>
-                        <input type="date" class="form-control" id="anoLancamento" name="anoLancamento" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" onclick="adicionarFilme()">Adicionar Filme</button>
-                </form>
-            </div>
-        </section>
-        
-        <!-- Seção "Análise" -->
+      <!-- Seção "Adicionar Filme" -->
+      <section id="adicionar-filme">
+        <h1 class="mt-5">Filmes</h1>
         <div class="container">
-            <section id="analise">
-                <h1 class="mt-5">Análise</h1>
-                <!-- Formulário para adicionar uma análise -->
-                <form action="/analises/adicionar" method="post" class="mt-4">
-                    <div class="form-group">
-                        <label for="filme">Filme:</label>
-                        <select class="form-control" id="filme" name="filme" required>
-                            <!-- Opções para selecionar um filme (a serem adicionadas dinamicamente) -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="analise">Análise:</label>
-                        <textarea class="form-control" id="analise" name="analise" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="nota">Nota:</label>
-                        <input type="number" class="form-control" id="nota" name="nota" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" onclick="adicionarAnalise()">Adicionar Análise</button>
-                </form>
-            </section>
+          <!-- Formulário para adicionar um filme -->
+          <form
+            id="adicionar-filme-form"
+            action="/filmes/adicionar"
+            method="post"
+            class="mt-4"
+          >
+            <div class="form-group">
+              <label for="titulo">Título:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="titulo"
+                name="titulo"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="sinopse">Sinopse:</label>
+              <textarea
+                class="form-control"
+                id="sinopse"
+                name="sinopse"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="genero">Gênero:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="genero"
+                name="genero"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="anoLancamento">Data de Lançamento:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="anoLancamento"
+                name="anoLancamento"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              onclick="adicionarFilme()"
+            >
+              Adicionar Filme
+            </button>
+          </form>
         </div>
+      </section>
 
-        <!-- Elemento para exibição da lista de filmes -->
-        <div id="lista-filmes"></div>
+      <hr />
 
-        <!-- Elemento para exibição das análises -->
-        <div id="exibicao-analises"></div>
+      <!-- Seção "Análise" -->
+      <div class="container">
+        <section id="analise">
+          <h1 class="mt-5">Análise</h1>
+          <!-- Formulário para adicionar uma análise -->
+          <form
+            id="analise-form"
+            action="/analises/adicionar"
+            method="post"
+            class="mt-4"
+          >
+            <div class="form-group">
+              <label for="filme">Filme:</label>
+              <select class="form-control" id="filme" name="filme" required>
+                <!-- Opções para selecionar um filme (a serem adicionadas dinamicamente) -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="analise">Análise:</label>
+              <textarea
+                class="form-control"
+                id="analise"
+                name="analise"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="nota">Nota:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="nota"
+                name="nota"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              onclick="adicionarAnalise()"
+            >
+              Adicionar Análise
+            </button>
+          </form>
+        </section>
+      </div>
+      <hr />
+
+      <!-- Elemento para exibição da lista de filmes -->
+      <div id="lista-filmes"></div>
+
+      <!-- Elemento para exibição das análises -->
+      <div id="exibicao-analises"></div>
     </div>
+
+    <!-- Botão para alternar o tema claro/escuro -->
+    <button
+      class="btn btn-outline-secondary ml-2 toggle-theme-button"
+      onclick="toggleTheme()"
+    >
+      Dark Theme
+    </button>
 
     <!-- Incluindo scripts JavaScript necessários -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!-- Incluindo sua biblioteca para manipulação de cookies (exemplo: js-cookie) -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
     <!-- Incluindo seu arquivo script.js -->
-    <script src="/casa-cultural/src/main/resources/static/script.js"></script>
-</body>
+    <script src="/src/main/resources/static/script.js"></script>
+  </body>
 </html>
